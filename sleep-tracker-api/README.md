@@ -36,11 +36,9 @@ CREATE TABLE SleepRecord (
 
 The Sleep Tracker API provides the following endpoints:
 
-- **POST /users**: Create a new user.
-- **GET /users**: Retrieve a list of all users.
-- **GET /users/:userId/history**: Get the sleep records for a specific user.
-- **GET /users/sleep-records**: Get all users along with the number of sleep records for each user.
-- **POST /sleep-records**: Create a new sleep record.
+- **GET /user/:id/history**: Get the sleep records for a specific user.
+- **GET /user/sleep-records**: Get all users along with the number of sleep records for each user.
+- **POST /sleep-record**: Create a new sleep record.
 
 For more details on each endpoint, refer to the API documentation or the source code.
 
