@@ -16,7 +16,7 @@ This web application allows users to track their sleep duration over time. It in
 
 3. **Technologies**:
    - Frontend: React with TypeScript, Material-UI and Apache ECharts.
-   - Backend: Node.js with TypeScript, Express.js, and PostgreSQL or MySQL.
+   - Backend: Node.js with TypeScript, Express.js, and PostgreSQL.
 
 ## How to Run the Application
 
@@ -41,8 +41,13 @@ Follow these steps to run the Sleep Tracker Web Application:
 
 3. **Set Up the Database**:
 
-- Create a PostgreSQL or MySQL database for the application.
-- Update the database configuration in the backend (`backend/src/config/database.ts`) to connect to your database.
+- Create a PostgreSQL database for the application.
+
+```bash
+# Start the database
+cd sleep-tracker-api
+docker-compose up -d
+```
 
 4. **Start the Application**:
 

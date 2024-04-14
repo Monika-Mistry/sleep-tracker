@@ -1,0 +1,134 @@
+openapi: 3.0.1
+info:
+  title: Sleep Tracker API
+  version: 1.0.0
+  description: API endpoints for managing sleep tracking data for users.
+paths:
+  /users:
+    post:
+      summary: Create User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                gender:
+                  type: string
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  gender:
+                    type: string
+    get:
+      summary: Get Users
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    gender:
+                      type: string
+  "/users/{userId}/history":
+    get:
+      summary: Get User Sleep History
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    user_id:
+                      type: integer
+                    sleep_duration:
+                      type: integer
+                    record_date:
+                      type: string
+                      format: date
+  /users/sleep-records:
+    get:
+      summary: Get Users Sleep Records
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    gender:
+                      type: string
+                    sleep_records_count:
+                      type: integer
+    post:
+      summary: Create Sleep Record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                sleep_duration:
+                  type: integer
+                record_date:
+                  type: string
+                  format: date
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  user_id:
+                    type: integer
+                  sleep_duration:
+                    type: integer
+                  record_date:
+                    type: string
+                    format: date
