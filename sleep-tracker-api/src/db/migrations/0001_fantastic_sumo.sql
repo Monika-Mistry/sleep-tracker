@@ -1,0 +1,1 @@
+ALTER TABLE "sleepRecord" ALTER COLUMN "duration" SET DATA TYPE numeric(4, 2);

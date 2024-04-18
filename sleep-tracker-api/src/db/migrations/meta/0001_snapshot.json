@@ -1,6 +1,6 @@
 {
-  "id": "261763dc-7587-4a7e-9830-b44a8fb3b023",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "930437cc-f110-427d-a1fc-c9061a877f85",
+  "prevId": "261763dc-7587-4a7e-9830-b44a8fb3b023",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -22,7 +22,7 @@
         },
         "duration": {
           "name": "duration",
-          "type": "numeric(2, 2)",
+          "type": "numeric(4, 2)",
           "primaryKey": false,
           "notNull": true
         },

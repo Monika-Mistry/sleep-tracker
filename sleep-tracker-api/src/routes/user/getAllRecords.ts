@@ -7,7 +7,9 @@ import { User } from "./../../db/index";
  */
 export const getAllRecords = async (_req: Request, res: Response) => {
   try {
+    console.log("GET ALL");
     const result = await User.recordsByUser();
+    console.log(result);
 
     // Send the result as a response
     res.status(200).json(result);

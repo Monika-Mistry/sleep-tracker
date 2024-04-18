@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createSelectSchema } from "drizzle-zod";
-import { and, count, eq } from "drizzle-orm";
+import { and, count, desc, eq } from "drizzle-orm";
 
 import { user } from "./user.sql";
 import { zod } from "../utils/zod";
@@ -75,7 +75,7 @@ export const fromNameAndGender = zod(
 );
 
 /**
- * Schema for querying user's sleep record history based on ID.
+ * Schema for querying user's sleep record history based on ID for last 7 days.
  * @param {object} input - Input data for querying user's history.
  * @param {number} input.id - The ID of the user.
  * @returns A promise that resolves with the query result.
@@ -87,6 +87,8 @@ export const fromIdHistory = zod(Info.pick({ id: true }), async (input) => {
     .from(user)
     .where(eq(user.id, input.id))
     .leftJoin(sleepRecord, eq(user.id, sleepRecord.userId))
+    .orderBy(desc(sleepRecord.recordDate))
+    .limit(7)
     .execute();
 });
 
@@ -103,7 +105,7 @@ export const recordsByUser = async () => {
       sleepRecords: count(sleepRecord.id),
     })
     .from(user)
-    .fullJoin(sleepRecord, eq(user.id, sleepRecord.userId))
+    .innerJoin(sleepRecord, eq(user.id, sleepRecord.userId))
     .groupBy(user.id)
     .execute();
 };
