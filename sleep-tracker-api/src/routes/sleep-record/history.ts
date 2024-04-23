@@ -1,15 +1,19 @@
 import { Request, Response } from "express";
 
-import { User } from "./../../db/index";
+import { SleepRecord } from "../../db/index";
 
 /**
  *  Route handler to fetch sleep history for a user by ID.
  */
 export const history = async (req: Request, res: Response) => {
   try {
-    const validatedData = await User.Info.pick({ id: true }).parse(req.params);
+    const { id } = req.params;
 
-    const result = await User.fromIdHistory(validatedData);
+    const validatedData = await SleepRecord.Info.pick({ userId: true }).parse({
+      userId: Number(id),
+    });
+
+    const result = await SleepRecord.fromUserIdHistory(validatedData);
 
     // Send the result as a response
     res.status(200).json(result);

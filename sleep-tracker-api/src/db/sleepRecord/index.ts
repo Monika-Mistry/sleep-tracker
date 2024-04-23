@@ -8,6 +8,7 @@ import { Transaction } from "../utils/transaction";
 import { Info as UserInfo } from "../user";
 import { SleepRecord, User } from "../index";
 import { formatDate } from "../utils/date";
+import { eq, desc } from "drizzle-orm";
 
 /**
  * Select schema for the "sleepRecord" table.
@@ -83,5 +84,24 @@ export const createSleepRecord = zod(
         return;
       }
     });
+  }
+);
+
+/**
+ * Retrieves the sleep records for a given user ID.
+ * @param {string} input.userId - The ID of the user.
+ * @returns {Promise<Array<SleepRecord>>} - A promise that resolves to an array of sleep records.
+ */
+export const fromUserIdHistory = zod(
+  Info.pick({ userId: true }),
+  async (input) => {
+    const database = await db();
+    return await database
+      .select()
+      .from(sleepRecord)
+      .where(eq(sleepRecord.userId, input.userId))
+      .orderBy(desc(sleepRecord.recordDate))
+      .limit(7)
+      .execute();
   }
 );

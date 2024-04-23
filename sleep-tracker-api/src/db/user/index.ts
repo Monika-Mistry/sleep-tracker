@@ -75,24 +75,6 @@ export const fromNameAndGender = zod(
 );
 
 /**
- * Schema for querying user's sleep record history based on ID for last 7 days.
- * @param {object} input - Input data for querying user's history.
- * @param {number} input.id - The ID of the user.
- * @returns A promise that resolves with the query result.
- */
-export const fromIdHistory = zod(Info.pick({ id: true }), async (input) => {
-  const database = await db();
-  return await database
-    .select()
-    .from(user)
-    .where(eq(user.id, input.id))
-    .leftJoin(sleepRecord, eq(user.id, sleepRecord.userId))
-    .orderBy(desc(sleepRecord.recordDate))
-    .limit(7)
-    .execute();
-});
-
-/**
  * Function to fetch records by user, including user's name, gender, and count of sleep records.
  * @returns A promise that resolves with the query result.
  */
@@ -100,6 +82,7 @@ export const recordsByUser = async () => {
   const database = await db();
   return await database
     .select({
+      id: user.id,
       name: user.name,
       gender: user.gender,
       sleepRecords: count(sleepRecord.id),

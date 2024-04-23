@@ -1,7 +1,7 @@
 import { Express } from "express";
 import { create } from "./sleep-record/create";
 import { getAllRecords } from "./user/getAllRecords";
-import { history } from "./user/history";
+import { history } from "./sleep-record/history";
 
 export const routes = (app: Express) => {
   app.post("/sleep-record", create);
