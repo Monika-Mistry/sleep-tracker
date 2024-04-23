@@ -61,7 +61,7 @@ docker-compose up -d
 
 # Start the frontend development server:
   cd sleep-tracker-ui
-  yarn start
+  yarn dev
 ```
 
 5. **Access the Application**:
