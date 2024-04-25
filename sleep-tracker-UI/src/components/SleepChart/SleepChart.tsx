@@ -1,48 +1,16 @@
 import { EChartsOption } from "echarts";
-import { SleepRecord } from "../types/SleepRecord";
-import ReactBarChart from "./BarChart";
+import { SleepRecord } from "../../types/SleepRecord";
+import ReactBarChart from "../BarChart";
 import { useEffect, useState } from "react";
+import { processSleepChartData } from "./processSleepChartData";
 
 type SleepChartProps = { data: SleepRecord[] | null };
 const SleepChart = ({ data }: SleepChartProps) => {
   const [option, setOption] = useState<EChartsOption | null>(null);
 
-  const processData = (historyData: SleepRecord[]) => {
-    // Initialize an object to store sleep duration for each date
-    const sleepData: Record<string, number> = {};
-
-    // Loop through the data and populate sleepData
-    historyData.forEach((item) => {
-      const duration = parseFloat(String(item.duration));
-
-      if (item.recordDate) {
-        const date = new Date(item.recordDate).toLocaleDateString();
-        // Store the duration for the date
-        sleepData[date] = duration;
-      }
-    });
-
-    // Generate x-axis labels (last 7 days)
-    const today = new Date();
-    const xAxisData = [];
-    for (let i = 6; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      xAxisData.push(date.toLocaleDateString());
-    }
-
-    // Generate y-axis data
-    const seriesData = xAxisData.map((date) => sleepData[date] || 0);
-
-    return {
-      xAxisData,
-      seriesData,
-    };
-  };
-
   useEffect(() => {
     if (data) {
-      const { xAxisData, seriesData } = processData(data);
+      const { xAxisData, seriesData } = processSleepChartData(data);
 
       setOption({
         title: {

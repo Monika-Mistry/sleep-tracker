@@ -3,9 +3,9 @@ import Layout from "../components/Layout";
 import SleepRecordTable from "../components/SleepRecordTable";
 import { useLoaderData } from "react-router-dom";
 import { SleepRecord, UserSleepRecord } from "../types/SleepRecord";
-import { getSleepRecordHistory } from "../api/user/getSleepRecordHistory";
+import { getSleepRecordHistory } from "../api/sleepRecord/getSleepRecordHistory";
 import { useState } from "react";
-import SleepChart from "../components/SleepChart";
+import SleepChart from "../components/SleepChart/SleepChart";
 
 const SleepRecordHistory = () => {
   const [history, setHistory] = useState<SleepRecord[] | null>(null);

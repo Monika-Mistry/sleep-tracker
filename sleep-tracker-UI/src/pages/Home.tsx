@@ -6,12 +6,20 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <Layout>
-      <Typography variant="h1">Welcome to Sleep Tracker</Typography>
-      <Typography variant="body1" align="center" gutterBottom>
-        Track your sleep to improve your health and well-being. Click below to
-        add your sleep data or view historical sleep data.
+      <Typography variant="h3" align="center">
+        Track Your Zzz's: Snooze smarter, not harder!
       </Typography>
-      <Grid container spacing={2}>
+      <Typography variant="body1" align="center" gutterBottom>
+        Unlock Your Dream Potential, View Your Sleep History, and Wake Up
+        Refreshed Every Day!
+      </Typography>
+      <Grid
+        container
+        spacing={2}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Grid item>
           <Button
             variant="contained"

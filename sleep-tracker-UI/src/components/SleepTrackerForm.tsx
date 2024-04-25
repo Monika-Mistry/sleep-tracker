@@ -17,7 +17,7 @@ export type SleepRecordFormData = {
 };
 
 type SleepRecordFormProps = {
-  onSubmit: (formData: SleepRecordFormData) => void;
+  onSubmit: (formData: SleepRecordFormData, onSuccessCb: () => void) => void;
 };
 
 const SleepRecordForm = ({ onSubmit }: SleepRecordFormProps) => {
@@ -38,13 +38,19 @@ const SleepRecordForm = ({ onSubmit }: SleepRecordFormProps) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(formData);
+    onSubmit(formData, () =>
+      setFormData({ name: "", gender: "", duration: "" })
+    );
+  };
+
+  const handleCancel = () => {
+    setFormData({ name: "", gender: "", duration: "" });
   };
 
   return (
     <Paper style={{ padding: "20px" }}>
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
               fullWidth
@@ -99,9 +105,21 @@ const SleepRecordForm = ({ onSubmit }: SleepRecordFormProps) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained" color="primary" type="submit">
-              Submit
-            </Button>
+            <div
+              style={{ display: "flex", gap: "16px", justifyContent: "end" }}
+            >
+              <Button
+                variant="text"
+                color="secondary"
+                type="button"
+                onClick={handleCancel}
+              >
+                Cancel
+              </Button>
+              <Button variant="contained" color="primary" type="submit">
+                Submit
+              </Button>
+            </div>
           </Grid>
         </Grid>
       </form>

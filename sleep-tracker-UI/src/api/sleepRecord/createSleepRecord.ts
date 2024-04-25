@@ -1,3 +1,8 @@
+/**
+ * Creates a new sleep record.
+ * @param {SleepRecord} record - The sleep record to be created.
+ * @returns {Promise<any>} - A promise that resolves to the response JSON.
+ */
 import { SleepRecord } from "../../types/SleepRecord";
 
 export const createSleepRecord = (record: SleepRecord) =>
